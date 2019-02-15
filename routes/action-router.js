@@ -39,6 +39,56 @@ router.get('/', (req, res) => {
         })
 });
 
+router.get('/:id', (req, res) => {
+    const actionId = req.params.id;
+    try {
+        db.get(actionId)
+            .then(action => {
+                res.status(200).json(action) 
+            })
+            .catch(error => {
+                res.status(404).json({
+                    message: "Action could not be found with this Id",
+                    error
+                })
+            })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server could not find action",
+            error
+        })
+    }
+
+});
+
+router.put('/:id', (req, res) => {
+    const actionId = req.params.id;
+    const actionInfo = req.body;
+
+    try {
+        db.update(actionId, actionInfo)
+            .then(action => {
+                if(action){
+                    res.status(200).json(action)
+                }else{
+                    res.status(404).json({
+                        message: "Action could not be found with this ID",
+                    })
+                }
+            })
+            .catch(error => {
+                res.status(400).json({
+                    message: "Bad request. Provide description or notes",
+                    error
+                })
+            })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server could not update action"
+        })
+    }
+});
+
 router.delete('/:id', (req, res) => {
     const actionId = req.params.id;
     
