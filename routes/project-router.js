@@ -53,7 +53,34 @@ router.get('/:id', (req, res) => {
         })
         .catch(error => {
             res.status(404).json({
-                message: "Could not find project"
+                message: "Could not find project",
+                error
+            })
+        }) 
+    } catch (error) {
+        res.status(500).json({
+            message: "Server could not find project"
+        })
+    }
+});
+
+router.get('/:id/actions', (req, res) => {
+    const projectId = req.params.id;
+    try {
+        db.getProjectActions(projectId)
+        .then(project => {
+            if(project.length > 0){
+                res.status(200).json(project)
+            }else{
+                res.status(404).json({
+                    message: "This project has no actions"
+                })
+            }
+        })
+        .catch(error => {
+            res.status(404).json({
+                message: "Could not find project",
+                error
             })
         }) 
     } catch (error) {
