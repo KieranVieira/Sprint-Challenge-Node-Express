@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Project = styled.div`
-    margin: 25px;
+    margin: 35px;
     a{
         border: 1px solid gray;
         padding: 15px;

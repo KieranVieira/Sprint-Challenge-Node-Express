@@ -52,12 +52,15 @@ class SingleProject extends React.Component{
         return(
             <ActionContainer>
                 <Link to='/'>Home</Link>
-                {this.state.actions.map(action => {
+                {this.state.actions.length > 0 ? 
+                this.state.actions.map(action => {
                     return <Action>
                         <h1>{action.description}</h1>
                         <h3>{action.notes}</h3>
                     </Action>
-                })}
+                }):
+                <h1>No actions on this project</h1>
+                }
             </ActionContainer>
         )
     }
