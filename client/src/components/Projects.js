@@ -3,6 +3,17 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const ProjectsConatiner = styled.div`
+    text-align: center;
+    h1{
+        font-size: 3rem;
+    }
+    h2{
+        font-size: 2rem;
+        font-weight: 100
+    }
+`;
+
 const Project = styled.div`
     margin: 35px;
     a{
@@ -31,11 +42,14 @@ class Projects extends React.Component{
 
     render(){
         return(
-            this.state.projects.map(project => {
-                return <Project>
-                <h1><Link to={`/project/${project.id}`}>{project.name}</Link></h1>
-                </Project>
-            })
+            <ProjectsConatiner>
+                <h1>All Projects</h1>
+                {this.state.projects.map(project => {
+                    return <Project>
+                    <h2><Link to={`/project/${project.id}`}>{project.name}</Link></h2>
+                    </Project>
+                })}
+            </ProjectsConatiner>
         )
     }
 }

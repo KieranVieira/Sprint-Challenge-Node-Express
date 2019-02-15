@@ -57,6 +57,7 @@ class SingleProject extends React.Component{
                     return <Action>
                         <h1>{action.description}</h1>
                         <h3>{action.notes}</h3>
+                        <h3>{action.completed ? 'Completed': 'Incomplete'}</h3>
                     </Action>
                 }):
                 <h1>No actions on this project</h1>
